@@ -1,13 +1,13 @@
-import 'dart:ffi';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app_clean_arch/core/network/api_constants.dart';
 import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
-import 'package:movies_app_clean_arch/movies/presentation/controller/bloc.dart';
-import 'package:movies_app_clean_arch/movies/presentation/controller/bloc_state.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/movie_bloc/bloc_state.dart';
 import 'package:movies_app_clean_arch/movies/presentation/screens/movie_details_screen.dart';
+
+import '../controller/movie_bloc/bloc.dart';
 
 
 class BannerWidget extends StatelessWidget {

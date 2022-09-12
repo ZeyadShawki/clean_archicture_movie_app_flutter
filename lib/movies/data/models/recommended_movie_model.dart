@@ -1,8 +1,8 @@
 import 'package:movies_app_clean_arch/movies/domain/entities/recommended%20_movie.dart';
 
 class RecommendedMovieModel extends RecommendedMovie {
-  RecommendedMovieModel(
-      {required super.overview,
+  const RecommendedMovieModel(
+      { required super.overview,
       required super.title,
       required super.id,
       required super.backdropPath,

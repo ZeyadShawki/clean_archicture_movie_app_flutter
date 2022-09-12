@@ -116,6 +116,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_url_image_load_fail:
+    dependency: "direct main"
+    description:
+      name: flutter_url_image_load_fail
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   get_it:
     dependency: "direct main"
     description:

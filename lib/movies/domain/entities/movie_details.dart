@@ -24,6 +24,7 @@ const MovieDetails
     required this.runtime,
   });
 
+  @override
   List<Object> get props =>
       [runtime,backDropPath, id, title, overview, voteAverage, releaseDate, genre,];
 

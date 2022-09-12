@@ -1,7 +1,5 @@
 import 'package:movies_app_clean_arch/core/error/failure.dart';
 import 'package:movies_app_clean_arch/core/error/server_exception.dart';
-import 'package:movies_app_clean_arch/core/network/error_message_model.dart';
-import 'package:movies_app_clean_arch/movies/data/models/recommended_movie_model.dart';
 import 'package:movies_app_clean_arch/movies/data/remote_data_source/remote_data_source_movie.dart';
 import 'package:movies_app_clean_arch/movies/domain/entities/movie.dart';
 import 'package:movies_app_clean_arch/movies/domain/entities/movie_details.dart';

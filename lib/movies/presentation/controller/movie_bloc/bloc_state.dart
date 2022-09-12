@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 
-import '../../domain/entities/movie.dart';
+import '../../../domain/entities/movie.dart';
 
  class MovieState extends Equatable {
 

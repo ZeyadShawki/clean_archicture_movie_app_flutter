@@ -3,7 +3,7 @@ import 'package:movies_app_clean_arch/movies/domain/entities/genre.dart';
 import 'package:movies_app_clean_arch/movies/domain/entities/movie_details.dart';
 
 class MovieDetailsModel extends MovieDetails {
-  MovieDetailsModel(
+  const MovieDetailsModel(
       {required super.backDropPath,
       required super.id,
       required super.title,

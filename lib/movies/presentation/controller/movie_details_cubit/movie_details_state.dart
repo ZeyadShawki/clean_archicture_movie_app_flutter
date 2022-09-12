@@ -1,4 +1,10 @@
-part of 'movie_details_cubit.dart';
+
+
+import'package:equatable/equatable.dart';
+import 'package:movies_app_clean_arch/movies/domain/entities/recommended%20_movie.dart';
+
+import '../../../../core/utils/enum_movie_state.dart';
+import '../../../domain/entities/movie_details.dart';
 
 
 class MovieDetailsInitial extends Equatable {

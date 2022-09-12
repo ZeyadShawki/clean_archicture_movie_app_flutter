@@ -18,12 +18,13 @@ class Movie extends Equatable{
       this.overview,
       this.voteAverage,
       this.releaseDate,
-    this.posterPath
+      this.posterPath
 
   });
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props =>
+      [
     id,
     title,
     backdropPath,

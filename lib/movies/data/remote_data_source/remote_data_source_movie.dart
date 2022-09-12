@@ -96,10 +96,11 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource{
   Future<List<MovieModel>> searchForMovie(String query) async{
   final response=await Dio().get(ApiConstants().searchForQueryPathMaker(query));
    
-  if(response.statusCode==200)
+  if(response.statusCode==200) {
     return List<MovieModel>.from((response.data['results'] as List).map((e) => MovieModel.fromJson(e)));
-  else
+  } else {
     throw ServerException(errorMessageModel:ErrorMessageModel.fromJson(response.data));
+  }
   
   }
   

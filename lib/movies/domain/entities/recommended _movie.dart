@@ -1,13 +1,14 @@
+
 import 'package:equatable/equatable.dart';
 
 class RecommendedMovie extends Equatable {
-  String? backdropPath;
-  String title;
-  int id;
-  String overview;
-  String posterPath;
+ final String? backdropPath;
+ final String title;
+ final int id;
+ final  String overview;
+ final String posterPath;
 
-  RecommendedMovie({
+  const RecommendedMovie({
     required this.overview,
     required this.title,
     required this.id,

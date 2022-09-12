@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app_clean_arch/core/service_loacater/si.dart';
-import 'package:movies_app_clean_arch/movies/domain/reposetry/base_movie_repostery.dart';
-import 'package:movies_app_clean_arch/movies/domain/usecase/get_recmonded_movie_usecase.dart';
-import 'package:movies_app_clean_arch/movies/presentation/screens/movie_details_screen.dart';
 import 'package:movies_app_clean_arch/movies/presentation/screens/movie_screen.dart';
 
-import 'movies/domain/usecase/search_for_movie_use_case.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

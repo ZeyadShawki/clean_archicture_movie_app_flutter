@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app_clean_arch/core/network/api_constants.dart';
-import 'package:movies_app_clean_arch/movies/presentation/controller/bloc_state.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/movie_bloc/bloc_state.dart';
 
-import '../controller/bloc.dart';
+import '../controller/movie_bloc/bloc.dart';
 import '../screens/movie_details_screen.dart';
 
 class GetTopRatedListViewWidget extends StatelessWidget {
