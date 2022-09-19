@@ -4,7 +4,9 @@ import 'package:movies_app_clean_arch/core/network/api_constants.dart';
 import 'package:movies_app_clean_arch/core/service_loacater/si.dart';
 import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/movie_details_cubit/movie_details_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/screens/search_screen.dart';
 
+import '../../../core/utils/app_colors.dart';
 import '../controller/movie_details_cubit/movie_details_state.dart';
 
 // ignore: must_be_immutable
@@ -20,10 +22,39 @@ class MovieDetailsScreen extends StatelessWidget {
 
       child: BlocConsumer<MovieDetailsCubit,MovieDetailsInitial>(
 
-        listener: (context,state){},
+        listener: (context,state){
+        },
         builder: (context,state){
           if(state.recommendedstate==RequestState.isLoaded) {
             return Scaffold(
+                appBar: AppBar(
+
+                  backgroundColor: Colors.transparent,
+                  actions:[
+
+                    IconButton(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const SearchScreen()));
+                      },
+                        icon: Icon(Icons.search,color: AppColors.primarytextfieldpurplecolor,size: 30,)),
+                    const SizedBox(width: 10,),
+
+                  ],
+                  leading: IconButton(
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                        Icons.arrow_back_ios_new_outlined
+                    ),
+                  ),
+                  elevation: 0,
+                  centerTitle: true,
+                  title: Text('Movie Details',style: TextStyle(
+                      color: AppColors.primarytextfieldpurplecolor,
+                      fontSize: 20
+                  ),),
+                ),
             backgroundColor: Colors.grey.withOpacity(0.3),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -35,6 +66,7 @@ class MovieDetailsScreen extends StatelessWidget {
                       width: double.infinity,
                       image: NetworkImage
                         (ApiConstants().networkimagemaker(state.movieDetails.backDropPath))),
+
                    Padding(
                      padding: const EdgeInsets.all(10.0),
                      child: Text(state.movieDetails.title,
@@ -88,13 +120,24 @@ class MovieDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text('Over View:-',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10),
                     child: Text(state.movieDetails.overview,
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                        fontSize: 14
+                        fontSize: 15
                       ),),
                   ),
                   SizedBox(

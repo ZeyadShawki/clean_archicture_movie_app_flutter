@@ -14,8 +14,8 @@ class RecommendedMovieModel extends RecommendedMovie {
           overview: json['overview'],
           title: json['title'],
           id: json['id'],
-          backdropPath: json['backdrop_path'],
-          posterPath: json['poster_path'],
+          backdropPath: json['backdrop_path']??"",
+          posterPath: json['poster_path']??"",
       );
 
 }

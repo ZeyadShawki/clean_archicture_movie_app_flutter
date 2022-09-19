@@ -1,9 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
+import 'package:movies_app_clean_arch/movies/data/models/user_model.dart';
 
 import '../../../domain/entities/movie.dart';
 
  class MovieState extends Equatable {
+
+   final UserModel user;
 
   final RequestState nowPlayingState;
   final RequestState popularState;
@@ -19,6 +22,8 @@ import '../../../domain/entities/movie.dart';
 
 
   const MovieState({
+    this.user=const UserModel(userName: '', email: '', password: '', phone: '',profileImage: ''),
+
     this.nowPlayingState = RequestState.isLoading,
     this.popularState = RequestState.isLoading,
     this.topRatedState = RequestState.isLoading,
@@ -34,18 +39,23 @@ import '../../../domain/entities/movie.dart';
 
   MovieState copywith({
 
-       RequestState? nowPlayingState,
-       RequestState? popularState,
-       RequestState? topRatedState,
+      UserModel? user,
 
-       List<Movie>? nowPlayingMovie,
+      RequestState? nowPlayingState,
+      RequestState? popularState,
+      RequestState? topRatedState,
+
+     List<Movie>? nowPlayingMovie,
      List<Movie>? popularMovie,
      List<Movie>? topRatedMovie,
-     String? nowPlayingMessage,
+    
+    String? nowPlayingMessage,
     String? popularMessage,
     String? topRatedMessage,
 }){
     return MovieState(
+      user: user??this.user,
+
       nowPlayingMovie: nowPlayingMovie??this.nowPlayingMovie,
       nowPlayingState: nowPlayingState??this.nowPlayingState,
       nowPlayingMessage: nowPlayingMessage??this.nowPlayingMessage,

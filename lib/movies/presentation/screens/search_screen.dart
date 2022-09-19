@@ -29,11 +29,24 @@ class _SearchScreenState extends State<SearchScreen> {
   listener: (context, state) {
   },
   builder: (context, state) {
-
     return Scaffold(
-     appBar: AppBar(
+
+    appBar: AppBar(
+
        backgroundColor: Colors.transparent,
-       leading: Icon(Icons.movie_creation_outlined,color: AppColors.primarytextfieldpurplecolor,size: 30,),
+       actions:[
+         Icon(Icons.movie_creation_outlined,color: AppColors.primarytextfieldpurplecolor,size: 30,),
+         const SizedBox(width: 10,),
+
+       ],
+       leading: IconButton(
+         onPressed: (){
+           Navigator.pop(context);
+         },
+         icon: const Icon(
+           Icons.arrow_back_ios_new_outlined
+         ),
+       ),
        elevation: 0,
        centerTitle: true,
        title: Text('Search',style: TextStyle(
@@ -44,9 +57,10 @@ class _SearchScreenState extends State<SearchScreen> {
     backgroundColor: Colors.grey.withOpacity(0.2),
     resizeToAvoidBottomInset: false,
 
-    body: Form(
-      key:_formkey,
-      child: SingleChildScrollView(
+    body: SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Form(
+        key:_formkey,
         child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -81,34 +95,34 @@ class _SearchScreenState extends State<SearchScreen> {
            }
         },
 
-    decoration:InputDecoration(
-    prefixIcon: const Icon(Icons.search,color: Colors.white,),
-    hintText: 'Search for movie',
+      decoration:InputDecoration(
+      prefixIcon: const Icon(Icons.search,color: Colors.white,),
+      hintText: 'Search for movie',
 
-    hintStyle: const TextStyle(
-    color: Colors.white
-    ),
+      hintStyle: const TextStyle(
+      color: Colors.white
+      ),
 
    focusedErrorBorder: const OutlineInputBorder(
 
-     borderSide: BorderSide(
-     style: BorderStyle.none,
-     )
+       borderSide: BorderSide(
+       style: BorderStyle.none,
+       )
    ),
-    focusedBorder: OutlineInputBorder(
-    borderSide: const BorderSide(color: Colors.transparent),
-    borderRadius: BorderRadius.circular(30)
-    ),
-    enabledBorder: OutlineInputBorder(
-    borderSide: const BorderSide(color: Colors.transparent),
-    borderRadius: BorderRadius.circular(30,),
-    )
+      focusedBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.transparent),
+      borderRadius: BorderRadius.circular(30)
+      ),
+      enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.transparent),
+      borderRadius: BorderRadius.circular(30,),
+      )
 
-    ),
+      ),
 
-    ),
-    ),
-          if(state.searchState==RequestState.isLoaded)...[
+      ),
+      ),
+          if(state.searchState==RequestState.isLoaded&&_searchController.text!='')...[
             const SizedBox(height: 20,),
             Text('Search Result (${state.searchList.length})',style: TextStyle(
               fontSize: 20,
@@ -119,7 +133,7 @@ class _SearchScreenState extends State<SearchScreen> {
             physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height*0.8,
+            height: MediaQuery.of(context).size.height*0.7,
             child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context,index) {
@@ -149,20 +163,25 @@ class _SearchScreenState extends State<SearchScreen> {
          else if(_searchController.text=='')
            SizedBox(
                height: MediaQuery.of(context).size.height*0.8,
-               child: const Center(child: Text(
-                 '',
-                 style: TextStyle(
-                   fontSize: 30
-                 ),
-               )))
+               child:  Center(child:
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: const [
+                   Icon((Icons.movie_creation_outlined),size: 100,color: Colors.white,),
+                   Text('Start Search',style: TextStyle(
+                     color: Colors.white
+                   ),)
+                 ],
+               ),))
           else if(state.searchState==RequestState.isLoading)
             SizedBox(
                 height: MediaQuery.of(context).size.height*0.8,
                 child: const Center(child: CircularProgressIndicator()))
 
-    ],
-    ),
-    ),
+      ],
+      ),
+      ),
       ),
     ),
     );

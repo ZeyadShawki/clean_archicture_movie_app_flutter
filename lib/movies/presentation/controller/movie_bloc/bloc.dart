@@ -3,20 +3,34 @@ import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/get_nowplaying_movie_usecase.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/movie_bloc/bloc_state.dart';
 
+import '../../../../core/network/app_prefreances.dart';
 import '../../../domain/usecase/get_populer_movie_usecase.dart';
 import '../../../domain/usecase/get_top_rated_movie_usecase.dart';
+import '../../../domain/usecase/get_user_usecase.dart';
 
 class MovieBloc extends Cubit<MovieState> {
   final GetNowPlayingUseCase getNowPlayingUseCase;
   final GetPopularMovieUseCase getPopularMovieUseCase;
   final GetTopRatedUseCase getTopRatedUseCase;
-
-  MovieBloc(this.getNowPlayingUseCase,
+  final GetUserUseCase getUserUseCase;
+  MovieBloc(
+      this.getNowPlayingUseCase,
       this.getTopRatedUseCase,
-      this.getPopularMovieUseCase,)
+      this.getPopularMovieUseCase,
+      this.getUserUseCase,
+      )
       : super(const MovieState());
 
 
+
+  void getuserinfo()async{
+    String uid=await AppPrefrenaces().getUid();
+
+   final result= await getUserUseCase.execute(uid);
+   emit(state.copywith(user: result));
+
+
+  }
 
   void getNowPlaying() async {
     final result = await getNowPlayingUseCase.execute();
