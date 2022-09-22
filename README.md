@@ -1,4 +1,4 @@
-# movies_app_clean_arch with The Movie Database api and Firebade
+# movies_app_clean_arch with The Movie Database api and Firebase
 
 Movies App that help you to see latest movies and set watch list to be seen later using Firebase Aut and Firebase storage and Firebase Database and The Movie Databade
 
