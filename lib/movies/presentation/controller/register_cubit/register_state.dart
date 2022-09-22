@@ -1,4 +1,6 @@
-part of 'register_cubit.dart';
+
+import 'package:flutter/material.dart';
+import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 
 @immutable
 abstract class RegisterState {}

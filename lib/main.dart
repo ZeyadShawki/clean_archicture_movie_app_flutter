@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:movies_app_clean_arch/core/network/app_prefreances.dart';
 import 'package:movies_app_clean_arch/core/service_loacater/si.dart';
+import 'package:movies_app_clean_arch/movies/presentation/screens/home_bottom_nav_screen.dart';
 import 'package:movies_app_clean_arch/movies/presentation/screens/login_screeen.dart';
-import 'package:movies_app_clean_arch/movies/presentation/screens/movie_screen.dart';
 // ignore: unused_import
 import 'package:movies_app_clean_arch/movies/presentation/screens/register_screen.dart';
 
@@ -14,10 +15,19 @@ void main() async{
   AppPrefrenaces().init();
  await  Firebase.initializeApp();
  Widget bootScreen=LoginScreen();
+
  String uid=await AppPrefrenaces().getUid();
 
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark));
+
+
+
+  
  if(uid!='') {
-   bootScreen=const HomeMovieScreen();
+   bootScreen=const HomeBottomNavScreen();
  }
 
   runApp( MyApp(bootScreen: bootScreen,));
@@ -30,9 +40,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
+
       ),
 
       debugShowCheckedModeBanner: false,

@@ -29,6 +29,9 @@ abstract class BaseMovieRemoteDataSource {
   Future<String> register(UserModel user);
   Future<UserModel> getUser(String uid);
   Future<String> uploadFile(File file);
+  Future<void> setWatchListIndex(List<int> index,String uid);
+  Future<List<dynamic>> getWatchListId(String uid);
+  Future<void> removeMovieFromWatchList(String uid,int value);
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
@@ -157,6 +160,45 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
      return '';
    }
   }
+  @override
+  Future<void> setWatchListIndex(List<int> index,String uid)async{
+    final doc = await FirebaseFirestore.instance.collection('watch_list').doc(uid).get();
+    if(doc.exists)
+    {
+      await FirebaseFirestore.instance.
+      collection('watch_list').doc(uid).update({
+        'movie_index':FieldValue.arrayUnion(index),
+      });
+    }else{
+      await FirebaseFirestore.instance.
+      collection('watch_list').doc(uid).set({
+        'movie_index':index,
+      });
+    }
+  }
 
+  @override
+  Future<List<dynamic>> getWatchListId(String uid)async{
+    DocumentSnapshot<Map<String,dynamic>> snap=await FirebaseFirestore.instance.collection('watch_list').doc(uid).get();
+    if(snap.exists){
+      final map=snap.data();
+      List<dynamic> movieIndex= map!['movie_index'];
+      return movieIndex;
+    }else{
+      return Future.error('no data');
+    }
+  }
+
+  @override
+  Future<void> removeMovieFromWatchList(String uid,int value)async{
+    final snap=await FirebaseFirestore.instance.collection('watch_list').doc(uid).get();
+    if(snap.exists){
+      await FirebaseFirestore.instance.collection('watch_list').doc(uid).update({
+        'movie_index':FieldValue.arrayRemove([value])
+      });
+    }else{
+      Future.error('no list exists');
+    }
+  }
 
 }

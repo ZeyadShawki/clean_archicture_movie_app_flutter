@@ -11,10 +11,13 @@ class MovieDetailsModel extends MovieDetails {
       required super.voteAverage,
       required super.releaseDate,
       required super.genre,
-      required super.runtime});
+      required super.runtime,
+        required super.posterPath,
+      });
 
   factory MovieDetailsModel.fromJson(Map<String,dynamic> json)=>
       MovieDetailsModel(
+          posterPath: json['poster_path'],
           backDropPath: json['backdrop_path'],
           id: json['id'],
           title: json['original_title'],

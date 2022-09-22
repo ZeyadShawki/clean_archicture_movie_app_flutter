@@ -22,6 +22,8 @@ abstract class BaseMovieRepostery{
   Future<Either<Failure,String>> signIn(UserModel user);
   Future<UserModel> getUser(String uid);
   Future<String> uploadFile(File file);
-
+  Future<void> setWatchListIndex(List<int> index,String uid);
+  Future<List<dynamic>> getWatchListId(String uid);
+  Future<void> removeMovieFromWatchList(String uid,int value);
 
 }

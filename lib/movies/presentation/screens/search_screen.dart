@@ -4,6 +4,7 @@ import 'package:movies_app_clean_arch/core/network/api_constants.dart';
 import 'package:movies_app_clean_arch/core/utils/app_colors.dart';
 import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/search_cubit/search_for_movie_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/screens/home_bottom_nav_screen.dart';
 import 'package:movies_app_clean_arch/movies/presentation/screens/movie_details_screen.dart';
 
 import '../../../core/service_loacater/si.dart';
@@ -34,17 +35,14 @@ class _SearchScreenState extends State<SearchScreen> {
     appBar: AppBar(
 
        backgroundColor: Colors.transparent,
-       actions:[
-         Icon(Icons.movie_creation_outlined,color: AppColors.primarytextfieldpurplecolor,size: 30,),
-         const SizedBox(width: 10,),
 
-       ],
        leading: IconButton(
          onPressed: (){
-           Navigator.pop(context);
+           Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeBottomNavScreen()));
          },
          icon: const Icon(
-           Icons.arrow_back_ios_new_outlined
+           Icons.arrow_back_ios_new_outlined,
+           color: Colors.white,
          ),
        ),
        elevation: 0,
@@ -72,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
         decoration: BoxDecoration(
 
-        color: Colors.blueAccent.withOpacity(0.3),
+        color: Colors.deepOrange.withOpacity(0.7),
         borderRadius: BorderRadius.circular(30)
         ),
         child: TextFormField(
@@ -103,10 +101,10 @@ class _SearchScreenState extends State<SearchScreen> {
       color: Colors.white
       ),
 
-   focusedErrorBorder: const OutlineInputBorder(
+    focusedErrorBorder: const OutlineInputBorder(
 
        borderSide: BorderSide(
-       style: BorderStyle.none,
+        style: BorderStyle.none,
        )
    ),
       focusedBorder: OutlineInputBorder(

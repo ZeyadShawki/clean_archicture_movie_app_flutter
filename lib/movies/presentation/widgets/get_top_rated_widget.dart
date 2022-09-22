@@ -19,7 +19,7 @@ class GetTopRatedListViewWidget extends StatelessWidget {
         if(state.topRatedMovie!=[]) {
           return  Container(
 
-            height: MediaQuery.of(context).size.height*0.2,
+            height: MediaQuery.of(context).size.height*0.3,
 
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: ListView.separated(

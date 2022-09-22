@@ -125,4 +125,33 @@ class MovieRepostery extends BaseMovieRepostery{
     }
   }
 
+  @override
+  Future<void> setWatchListIndex(List<int> index, String uid)async {
+    try{
+      await remoteDataSource.setWatchListIndex(index, uid);
+    }catch(e){
+      return Future.error(e.toString());
+    }
+  }
+
+  @override
+  Future<List> getWatchListId(String uid) async{
+   try{
+   final response= await remoteDataSource.getWatchListId(uid);
+   return response;
+   }catch (e){
+     return Future.error(e.toString());
+   }
+
+  }
+
+  @override
+  Future<void> removeMovieFromWatchList(String uid, int value)async {
+   try{
+
+   }catch (e){
+     return Future.error(e.toString());
+   }
+  }
+
 }

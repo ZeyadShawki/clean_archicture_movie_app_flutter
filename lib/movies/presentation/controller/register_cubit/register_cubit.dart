@@ -9,10 +9,9 @@ import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 import 'package:movies_app_clean_arch/movies/data/models/user_model.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/signin_use_case.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/upload_file_use_case.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/register_cubit/register_state.dart';
 
-import '../../../core/network/app_prefreances.dart';
-
-part 'register_state.dart';
+import '../../../../core/network/app_prefreances.dart';
 
 class RegisterCubit extends Cubit<RegisterInitial> {
   RegisterCubit(this.signInUseCase, this.uploadFileUseCase) : super(RegisterInitial());

@@ -12,14 +12,19 @@ import 'package:movies_app_clean_arch/movies/domain/usecase/get_populer_movie_us
 import 'package:movies_app_clean_arch/movies/domain/usecase/get_recmonded_movie_usecase.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/get_top_rated_movie_usecase.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/get_user_usecase.dart';
+import 'package:movies_app_clean_arch/movies/domain/usecase/get_watch_list_use_case.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/login_usecase.dart';
+import 'package:movies_app_clean_arch/movies/domain/usecase/remove_from_watch_list_use_case.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/search_for_movie_use_case.dart';
+import 'package:movies_app_clean_arch/movies/domain/usecase/set_watch_list_usecase.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/signin_use_case.dart';
 import 'package:movies_app_clean_arch/movies/domain/usecase/upload_file_use_case.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/login_cubit/login_cubit.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/movie_details_cubit/movie_details_cubit.dart';
-import 'package:movies_app_clean_arch/movies/presentation/controller/register_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/profile_cubit/my_profile_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/register_cubit/register_cubit.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/search_cubit/search_for_movie_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/watch_list_cubit/watch_list_cubit.dart';
 
 import '../../movies/presentation/controller/movie_bloc/bloc.dart';
 
@@ -28,11 +33,22 @@ class ServiceLocater{
   void init()async{
 
      si.registerFactory<MovieBloc>(() => MovieBloc(si(),si(),si(),si()));
-     si.registerFactory<MovieDetailsCubit>(() => MovieDetailsCubit(si(),si()));
+     si.registerFactory<MovieDetailsCubit>(() => MovieDetailsCubit(si(),si(),si()));
      si.registerFactory<SearchForMovieCubit>(() => SearchForMovieCubit(si()));
      si.registerFactory<LoginCubit>(() => LoginCubit(si()));
      si.registerFactory<RegisterCubit>(() => RegisterCubit(si(),si()));
+     si.registerFactory<MyProfileCubit>(() => MyProfileCubit(si()));
 
+
+
+     si.registerFactory<WatchListCubit>(() => WatchListCubit(si(),si(),si()));
+
+     si.registerLazySingleton<RemoveFromWatchListUseCase>(() => RemoveFromWatchListUseCase(si()));
+
+     si.registerLazySingleton<GetWatchListUseCase>(() => GetWatchListUseCase(si()));
+
+
+     si.registerLazySingleton<SetWatchListUseCase>(() => SetWatchListUseCase(si()));
 
      si.registerLazySingleton<UploadFileUseCase>(() => UploadFileUseCase(si()));
 

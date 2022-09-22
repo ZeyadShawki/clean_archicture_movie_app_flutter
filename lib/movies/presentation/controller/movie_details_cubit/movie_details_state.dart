@@ -17,13 +17,19 @@ class MovieDetailsInitial extends Equatable {
   final List<RecommendedMovie> recommendedmovieDetails;
   final String recommendedmovieMessage;
 
+  // wish list message success
+  final String addtoListMessage;
 
   const MovieDetailsInitial({
+    this.addtoListMessage='',
     this.recommendedstate = RequestState.isLoading,
     this.recommendedmovieDetails = const [],
     this.recommendedmovieMessage = '',
-    this.movieDetailstate = RequestState.isLoading, this.movieDetails = const
-    MovieDetails(backDropPath:
+    this.movieDetailstate = RequestState.isLoading,
+    this.movieDetails = const
+    MovieDetails(
+        posterPath: '',
+        backDropPath:
     'backDropPath',
         id: 0,
         title: 'title',
@@ -36,6 +42,7 @@ class MovieDetailsInitial extends Equatable {
   });
 
   MovieDetailsInitial copWith({
+    String? addtoListMessage,
     RequestState? movieDetailstate,
     MovieDetails? movieDetails,
     String? movieDetailsMessage,
@@ -44,6 +51,7 @@ class MovieDetailsInitial extends Equatable {
     String? recommendedmovieMessage,
   }) {
     return MovieDetailsInitial(
+        addtoListMessage: addtoListMessage ?? this.addtoListMessage,
         movieDetailstate: movieDetailstate ?? this.movieDetailstate,
         movieDetails: movieDetails ?? this.movieDetails,
         movieDetailsMessage: movieDetailsMessage ?? this.movieDetailsMessage,
@@ -65,5 +73,6 @@ class MovieDetailsInitial extends Equatable {
         recommendedstate,
         recommendedmovieDetails,
         recommendedmovieMessage,
+        addtoListMessage,
       ];
 }

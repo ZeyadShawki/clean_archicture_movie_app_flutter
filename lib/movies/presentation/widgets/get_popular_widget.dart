@@ -21,7 +21,7 @@ class GetPopularListViewWidget extends StatelessWidget {
         if(state.popularMovie!=[]) {
            return  Container(
 
-             height: MediaQuery.of(context).size.height*0.2,
+             height: MediaQuery.of(context).size.height*0.3,
 
               padding: const EdgeInsets.symmetric(horizontal: 10),
              child: ListView.separated(
@@ -39,7 +39,7 @@ class GetPopularListViewWidget extends StatelessWidget {
                      borderRadius: BorderRadius.circular(15),
                      child: Image(
                        width: 150,
-
+                      height: 300,
                        fit: BoxFit.fill,
                        image: NetworkImage(
                          ApiConstants().networkimagemaker(state.popularMovie[index].posterPath),

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 import 'package:movies_app_clean_arch/movies/data/models/user_model.dart';
-import 'package:movies_app_clean_arch/movies/presentation/controller/register_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/register_cubit/register_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/controller/register_cubit/register_state.dart';
 import 'package:movies_app_clean_arch/movies/presentation/screens/movie_screen.dart';
 import '../../../core/service_loacater/si.dart';
 
