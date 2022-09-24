@@ -20,7 +20,7 @@ class WatchListScreen extends StatelessWidget {
         listener: (context,state){
         },
         builder: (context,state) {
-          if(state is WatchListSuccess &&context.read<WatchListCubit>().movieDetails!=[] ) {
+          if(state is WatchListSuccess &&context.read<WatchListCubit>().moviesFromApi!=[] ) {
           return  Scaffold(
            backgroundColor: Colors.grey.withOpacity(0.2),
          appBar: AppBar(

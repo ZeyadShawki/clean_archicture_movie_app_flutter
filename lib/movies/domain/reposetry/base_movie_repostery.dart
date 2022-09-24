@@ -18,7 +18,7 @@ abstract class BaseMovieRepostery{
   Future<Either<Failure,List<RecommendedMovie>>> getMovieRecommondation(int id);
   Future<Either<Failure,List<Movie>>> searchForMovie(String query);
 
-  Future<Either<Failure,String>> loginUser(String email,String password);
+  Future<String> loginUser(String email,String password);
   Future<Either<Failure,String>> signIn(UserModel user);
   Future<UserModel> getUser(String uid);
   Future<String> uploadFile(File file);

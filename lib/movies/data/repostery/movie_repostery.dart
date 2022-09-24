@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movies_app_clean_arch/core/error/failure.dart';
 import 'package:movies_app_clean_arch/core/error/server_exception.dart';
 import 'package:movies_app_clean_arch/movies/data/models/user_model.dart';
@@ -85,13 +86,13 @@ class MovieRepostery extends BaseMovieRepostery{
   }
 
   @override
-  Future<Either<Failure, String>> loginUser(String email, String password)async {
+  Future<String> loginUser(String email, String password)async {
     final result= await remoteDataSource.loginUser(email, password);
     try
         {
-          return Right(result);
-        }on ServerException catch(e){
-      return Left(ServerFailure(e.errorMessageModel.message));
+          return result;
+        } catch(e){
+      return Future.error(e.toString());
     }
   }
 
@@ -148,7 +149,7 @@ class MovieRepostery extends BaseMovieRepostery{
   @override
   Future<void> removeMovieFromWatchList(String uid, int value)async {
    try{
-
+     await remoteDataSource.removeMovieFromWatchList(uid, value);
    }catch (e){
      return Future.error(e.toString());
    }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/profile_cubit/my_profile_cubit.dart';
+import 'package:movies_app_clean_arch/movies/presentation/screens/login_screeen.dart';
 
 import '../../../core/service_loacater/si.dart';
 
@@ -13,7 +14,9 @@ class ProfileScreen extends StatelessWidget {
         create: (context)=> si<MyProfileCubit>()..getUserInfo(),
         child: BlocConsumer<MyProfileCubit,MyProfileState>(
           listener: (context,state){
-
+           if(state is SignOutSuccessState) {
+             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+           }
           },
           builder: (context,state){
             if(state is MyProfileSuccess){
@@ -110,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                               const SizedBox(height: 20,),
                               InkWell(
                                 onTap: (){
-
+                                 context.read<MyProfileCubit>().signOut();
                                 },
                                 child: Container(
                                   width: double.infinity,

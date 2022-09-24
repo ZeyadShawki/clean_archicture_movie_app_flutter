@@ -1,5 +1,5 @@
 // ignore: depend_on_referenced_packages
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 import 'package:movies_app_clean_arch/movies/domain/entities/user.dart';
@@ -11,8 +11,9 @@ part 'my_profile_state.dart';
 
 class MyProfileCubit extends Cubit<MyProfileState> {
   MyProfileCubit(this.userUseCase) : super(MyProfileInitial());
-
+static MyProfileCubit get(context)=> BlocProvider.of(context);
   final GetUserUseCase userUseCase;
+
 
   void getUserInfo()async{
     try{
@@ -22,6 +23,16 @@ class MyProfileCubit extends Cubit<MyProfileState> {
       emit(MyProfileSuccess(result));
     }catch (e){
       emit(MyProfileError(e.toString()));
+    }
+  }
+
+  void signOut()async{
+    try{
+     await AppPrefrenaces().removeUid();
+     emit(SignOutSuccessState());
+    }catch (e){
+      emit(SignOutErrorState(e.toString()));
+
     }
   }
 

@@ -7,7 +7,7 @@ class LoginUseCase{
 
   LoginUseCase(this._baseMovieRepostery);
 
-  Future<Either<Failure,String>> execute(String email,String password)async{
+  Future<String> execute(String email,String password)async{
     return await _baseMovieRepostery.loginUser(email, password);
   }
 

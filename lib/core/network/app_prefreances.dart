@@ -13,5 +13,8 @@ Future<void> saveUidofUser(String uid)async{
 Future<String> getUid()async{
   return sharedPreferences?.getString(Uid)??'';
 }
+Future<void> removeUid()async{
+ await  sharedPreferences?.remove(Uid);
+}
 
 }

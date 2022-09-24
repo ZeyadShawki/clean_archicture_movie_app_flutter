@@ -18,19 +18,19 @@ class WatchListCubit extends Cubit<WatchListState> {
   final GetMovieDetailsUseCase getMovieDetailsUseCase;
   final RemoveFromWatchListUseCase removeFromWatchListUseCase;
    List<MovieDetails> movieDetails=[];
+  List<dynamic> moviesFromApi= [];
 
   Future<void> getWatchList()async{
     emit(WatchListLoading());
     String uid=await AppPrefrenaces().getUid();
+    moviesFromApi= await getWatchListUseCase.execute(uid);
 
-     List<dynamic> moviesIndex= [];
-    moviesIndex= await getWatchListUseCase.execute(uid);
     movieDetails=[];
-    if(moviesIndex!=[])
+    if(moviesFromApi.isNotEmpty)
     {
-    for(int i=0;i<moviesIndex.length;i++)
+    for(int i=0;i<moviesFromApi.length;i++)
     {
-      final value = await getMovieDetailsUseCase.excute(moviesIndex[i]);
+      final value = await getMovieDetailsUseCase.excute(moviesFromApi[i]);
       value.fold((l) => null, (r) => movieDetails.add(r));
     }
     emit(WatchListSuccess(movieDetails));

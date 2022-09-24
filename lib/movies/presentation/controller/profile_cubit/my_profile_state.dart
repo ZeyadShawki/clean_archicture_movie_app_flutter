@@ -16,3 +16,10 @@ class MyProfileError extends MyProfileState {
   MyProfileError(this.message);
 
 }
+class SignOutSuccessState extends MyProfileState{}
+class SignOutErrorState extends MyProfileState{
+   final String message;
+
+  SignOutErrorState(this.message);
+
+}

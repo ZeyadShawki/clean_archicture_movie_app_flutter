@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // ignore: unused_import
 import 'package:movies_app_clean_arch/core/utils/enum_movie_state.dart';
 import 'package:movies_app_clean_arch/movies/presentation/controller/login_cubit/login_cubit.dart';
-import 'package:movies_app_clean_arch/movies/presentation/screens/movie_screen.dart';
+import 'package:movies_app_clean_arch/movies/presentation/screens/home_bottom_nav_screen.dart';
 import 'package:movies_app_clean_arch/movies/presentation/screens/register_screen.dart';
 
 import '../../../core/service_loacater/si.dart';
@@ -135,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                                           fontWeight: FontWeight.bold
                                       ),
                                       validator: (value){
-                                        if(value!.isEmpty||value.length<=8) {
+                                        if(value!.isEmpty||value.length<=6) {
                                           return 'Please enter valid password more than 8 characters';
                                         }
                                         return null;
@@ -178,7 +179,8 @@ class LoginScreen extends StatelessWidget {
 
                                     ),
                                     const SizedBox(height: 50,),
-                                    InkWell(
+
+                                  state is !LoginLoadingState ?  InkWell(
                                       onTap: (){
                                         if(_formkey.currentState!.validate()) {
                                           context.read<LoginCubit>().login(emailController.text, passwordController.text);
@@ -201,7 +203,12 @@ class LoginScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    ):Container(
+                                    child: const Center(child: CircularProgressIndicator()),
+                                  ),
+
+
+
                                     const SizedBox(height: 10,),
                                     const Text('OR',
                                       style: TextStyle(
@@ -284,8 +291,12 @@ class LoginScreen extends StatelessWidget {
       },
       listener: (context,state)
   {
+    if(state is LoginErrorState)
+      {
+        Fluttertoast.showToast(msg: state.message,gravity: ToastGravity.BOTTOM);
+      }
     if(state is LoginSuccessState) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeMovieScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const HomeBottomNavScreen()));
     }
   })
 );

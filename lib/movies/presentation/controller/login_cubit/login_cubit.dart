@@ -23,14 +23,14 @@ class LoginCubit extends Cubit<LoginState> {
 
   void login(String email,String password)async{
       emit(LoginLoadingState());
-     final resault=await loginUseCase.execute(email, password);
-     resault.fold((l) {
-
-       }, (r)async {
-       await AppPrefrenaces().saveUidofUser(r);
-       emit(LoginSuccessState());
-     });
-
+      try{
+      final resault = await loginUseCase.execute(email, password);
+      print(resault);
+      AppPrefrenaces().saveUidofUser(resault);
+      emit(LoginSuccessState());
+    }catch (e){
+        emit(LoginErrorState(e.toString()));
+      }
   }
 
 }

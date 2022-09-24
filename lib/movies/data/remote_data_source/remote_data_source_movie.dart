@@ -32,6 +32,7 @@ abstract class BaseMovieRemoteDataSource {
   Future<void> setWatchListIndex(List<int> index,String uid);
   Future<List<dynamic>> getWatchListId(String uid);
   Future<void> removeMovieFromWatchList(String uid,int value);
+
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
@@ -111,28 +112,27 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
 
   @override
   Future<String> loginUser(String email, String password) async {
-    final response=await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
-       // ignore: unnecessary_null_comparison
-       if(response.user!.uid!=null) {
-         return response.user!.uid;
-       } else {
-         throw ServerException(
-          errorMessageModel:
-              ErrorMessageModel(message: '', statusCode: 400, success: false));
-       }
+     String? uid;
+    try{
+     await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
+       uid=value.user!.uid;
+       return value.user!.uid;
+     });
+   }on FirebaseAuthException catch(e){
+     throw Future.error(e.toString());
+   }
+   return uid??'';
 
   }
 
   @override
   Future<String> register(UserModel user)async {
     final response=await FirebaseAuth.instance.createUserWithEmailAndPassword(email: user.email, password: user.password);
-   try
-         {
+   try {
          FirebaseFirestore.instance.collection('users').doc(response.user!.uid).set(user.toJson()).then((value) => null);
          return response.user!.uid;
-    }on FirebaseAuthException{
-      throw ServerException(errorMessageModel: ErrorMessageModel(message: 'error in Register',statusCode: 400,success: false));
+    }on FirebaseAuthException catch(e){
+      throw ServerException(errorMessageModel: ErrorMessageModel(message: e.toString(),statusCode: 400,success: false));
     }
 
   }
